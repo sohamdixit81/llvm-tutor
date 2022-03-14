@@ -1,0 +1,6 @@
+/home/soham/llvm-tutor/build/CMakeFiles/rebuild_cache.dir
+/home/soham/llvm-tutor/build/CMakeFiles/HelloWorld.dir
+/home/soham/llvm-tutor/build/CMakeFiles/acc_gen.dir
+/home/soham/llvm-tutor/build/CMakeFiles/edit_cache.dir
+/home/soham/llvm-tutor/build/CMakeFiles/omp_gen.dir
+/home/soham/llvm-tutor/build/CMakeFiles/intrinsics_gen.dir

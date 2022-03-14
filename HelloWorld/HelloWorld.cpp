@@ -23,6 +23,8 @@
 #include "llvm/Passes/PassBuilder.h"
 #include "llvm/Passes/PassPlugin.h"
 #include "llvm/Support/raw_ostream.h"
+#include "llvm/IR/InstIterator.h"
+
 
 using namespace llvm;
 
@@ -35,9 +37,26 @@ namespace {
 
 // This method implements what the pass does
 void visitor(Function &F) {
-    errs() << "(llvm-tutor) Hello from: "<< F.getName() << "\n";
-    errs() << "(llvm-tutor)   number of arguments: " << F.arg_size() << "\n";
-}
+    outs() << "In function : ";
+    if (F.hasName()) {
+      outs() << F.getName();
+    } else {
+      outs() << " (no name) ";
+    }
+    outs() << '\n';
+
+    for (inst_iterator I = inst_begin(F), E = inst_end(F); I != E; ++I) {
+      if (CallInst *CI = dyn_cast<CallInst>(&*I)) {
+        Function *calledFunction = CI->getCalledFunction();
+       if (calledFunction && calledFunction->hasName()) {
+          StringRef name = calledFunction->getName();
+          if (name.startswith_insensitive("s")) {
+            outs() << "Call to " << name << '\n';
+          }
+        }
+      }
+    }
+  }
 
 // New PM implementation
 struct HelloWorld : PassInfoMixin<HelloWorld> {
